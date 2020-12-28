@@ -1,0 +1,9 @@
+# config.yml
+
+a2jschema:
+  rootNamespace: TKusy\JSchema\Tests\Assets\
+  idPrefix: http://json-schema.org/schema/
+
+  destination:
+    path: ~
+    pathTemplate: "%s.schema.json"

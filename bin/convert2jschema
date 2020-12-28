@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+$paths = [
+    __DIR__ . '/../../../autoload.php',
+    __DIR__ . '/../vendor/autoload.php'
+];
+foreach ($paths as $path) {
+    if (is_file($path)) {
+        include $path;
+        break;
+    }
+}
+
+use Symfony\Component\Console\Application;
+use TKusy\JSchema\Command\ConvertToJschema;
+
+$application = new Application('Convert Symfony validator annotations to json schema');
+$output = new \Symfony\Component\Console\Output\ConsoleOutput();
+
+$container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
+
+$application->add(new ConvertToJschema($container));
+$application->setDefaultCommand('convert2jschema', true);
+$application->run(null, $output);

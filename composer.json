@@ -1,0 +1,42 @@
+{
+    "name": "tomasz-kusy/annotations-to-json-schema",
+    "description": "Convert Symfony validator annotations to json schema",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "json",
+        "jsonschema",
+        "validation"
+    ],
+    "require": {
+        "symfony/validator": "^5",
+        "symfony/console": "^5",
+        "symfony/property-info": "^5",
+        "phpdocumentor/reflection-docblock": "^5",
+        "symfony/doctrine-bridge": "^5",
+        "symfony/serializer": "^5",
+        "symfony/property-access": "^5",
+        "ext-json": "*",
+        "symfony/config": "^5",
+        "symfony/yaml": "^5",
+        "symfony/dependency-injection": "^5"
+    },
+    "authors": [
+        {
+            "name": "Tomasz Kusy"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"TKusy\\JSchema\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"TKusy\\JSchema\\Tests\\": "tests/"}
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "bin": [
+        "convert2jschema"
+    ]
+}
