@@ -37,6 +37,6 @@
         "phpunit/phpunit": "*"
     },
     "bin": [
-        "convert2jschema"
+        "bin/convert2jschema"
     ]
 }
