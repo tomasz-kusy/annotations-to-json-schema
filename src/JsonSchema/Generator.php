@@ -29,8 +29,8 @@ class Generator
     {
         $this->writer = $writer;
         $this->rootNamespace = $config['rootNamespace'];
-        $this->idPrefix = $config['idPrefix'];
-        $this->pathTemplate = $config['destination']['pathTemplate'];
+        $this->idPrefix = $config['idPrefix'] ?? '';
+        $this->pathTemplate = $config['destination']['pathTemplate'] ?? '%s.schema.json';
     }
 
     public function generate(array $allMetadata)
@@ -127,7 +127,7 @@ class Generator
         ];
     }
 
-    private function className2Id(string $className): string
+    public function className2Id(string $className): string
     {
         $relative = preg_replace(
             ['#' . preg_quote($this->rootNamespace, '#') . '#', '#\\\\\\\\#', '#\\\\#'],
