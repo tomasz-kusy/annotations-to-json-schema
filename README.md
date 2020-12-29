@@ -6,7 +6,7 @@ Generate JSON Schema documents based on annotations in PHP files.
 Version at developer stage.
 
 
-## Need
+## Motivation
 
 Many people (e.g. me) use PHP to transfer objects between client and server (DTO).
 The object must be serialized (ex. to XML or JSON) before it can be sent.

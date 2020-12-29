@@ -37,7 +37,7 @@ class ConvertToJschema extends Command
         $this->container->register('filesystem', Filesystem::class);
         $this->container->register('a2jschema.reader', PropertyReader::class);
         $this->container->register('a2jschema.writer', FileWriter::class)
-            ;//->addArgument(new Reference('filesystem'));
+            ->addArgument(new Reference('filesystem'));
         $this->container->register('a2jschema.generator', Generator::class)
             ->addArgument(new Reference('a2jschema.writer'));
 
@@ -92,12 +92,7 @@ class ConvertToJschema extends Command
         /** @var PropertyReader $reader */
         $reader = $this->container->get('a2jschema.reader');
 
-
-        $propertiesMetadata = $reader->getClassMetadata($entry);
-
-        $reader->readRecursive($propertiesMetadata);
-
-        $generator->generate($reader->getProperties());
+        $generator->generate($reader->getPropertiesTree($entry));
         return 0;
     }
 

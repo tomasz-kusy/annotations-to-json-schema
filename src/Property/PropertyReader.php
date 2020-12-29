@@ -35,22 +35,15 @@ class PropertyReader
     }
 
     /**
+     * @param $className
      * @return array
-     */
-    public function getProperties(): array
-    {
-        return $this->properties;
-    }
-
-    /**
-     * @param string $className
-     * @return \ReflectionProperty[]
      * @throws \ReflectionException
      */
-    public function getClassProperties(string $className)
+    public function getPropertiesTree(string $className)
     {
-        $reflectedClass = new \ReflectionClass($className);
-        return $reflectedClass->getProperties();
+        return $this->readRecursive(
+            $this->getClassMetadata($className)
+        );
     }
 
     /**
@@ -64,10 +57,9 @@ class PropertyReader
             return $this->properties[$className];
         }
 
+//        $this->validatorMetadata($className, $this->properties[$className] = []);
 
-        $this->validatorMetadata($className, $this->properties[$className] = []);
-
-        $reader = new AnnotationReader();
+//        $reader = new AnnotationReader();
 
         $reflectedClass = new \ReflectionClass($className);
 
@@ -86,9 +78,10 @@ class PropertyReader
 
     /**
      * @param PropertyMetadata[] $metaData
+     * @return array
      * @throws \ReflectionException
      */
-    public function readRecursive(array $metaData)
+    private function readRecursive(array $metaData)
     {
         foreach ($metaData as $propertyMetadata) {
             foreach ($propertyMetadata->getType() as $type) {
@@ -113,6 +106,7 @@ class PropertyReader
                 $this->readRecursive($meta);
             }
         }
+        return $this->properties;
     }
     /**
      * @param string $className
